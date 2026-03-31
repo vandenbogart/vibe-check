@@ -89,6 +89,20 @@ func TestParsePyPIFilename(t *testing.T) {
 			wantVer:  "3.1.0",
 			wantOK:   true,
 		},
+		{
+			name:     "wheel metadata PEP 658",
+			filename: "flask-3.1.0-py3-none-any.whl.metadata",
+			wantPkg:  "flask",
+			wantVer:  "3.1.0",
+			wantOK:   true,
+		},
+		{
+			name:     "sdist metadata PEP 658",
+			filename: "flask-3.1.0.tar.gz.metadata",
+			wantPkg:  "flask",
+			wantVer:  "3.1.0",
+			wantOK:   true,
+		},
 	}
 
 	for _, tt := range tests {

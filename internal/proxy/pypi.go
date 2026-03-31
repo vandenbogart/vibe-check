@@ -39,6 +39,9 @@ func ParsePyPIFilename(filename string) (pkg, version string, ok bool) {
 		filename = filename[:idx]
 	}
 
+	// Strip .metadata suffix (PEP 658 — pip requests metadata before full download)
+	filename = strings.TrimSuffix(filename, ".metadata")
+
 	// Determine type and strip extension
 	var base string
 	switch {
