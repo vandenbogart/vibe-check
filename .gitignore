@@ -1,1 +1,3 @@
 vibe-check
+*.exe
+.DS_Store
