@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/ebo/vibe-check/internal/gate"
-	"github.com/ebo/vibe-check/internal/registry"
+	"github.com/vandenbogart/vibe-check/internal/gate"
+	"github.com/vandenbogart/vibe-check/internal/registry"
 )
 
 const npmHost = "registry.npmjs.org"

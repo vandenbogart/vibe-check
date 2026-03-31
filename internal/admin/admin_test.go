@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebo/vibe-check/internal/config"
-	"github.com/ebo/vibe-check/internal/gate"
-	"github.com/ebo/vibe-check/internal/logging"
+	"github.com/vandenbogart/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/gate"
+	"github.com/vandenbogart/vibe-check/internal/logging"
 )
 
 func unixClient(sockPath string) *http.Client {

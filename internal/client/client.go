@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ebo/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/config"
 )
 
 // Client talks to the vibe-check daemon admin API over a Unix socket.

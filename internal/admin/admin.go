@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ebo/vibe-check/internal/config"
-	"github.com/ebo/vibe-check/internal/gate"
-	"github.com/ebo/vibe-check/internal/logging"
+	"github.com/vandenbogart/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/gate"
+	"github.com/vandenbogart/vibe-check/internal/logging"
 )
 
 // AllowRequest is the JSON body for POST /admin/allow.

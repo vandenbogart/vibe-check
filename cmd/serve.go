@@ -10,12 +10,12 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/ebo/vibe-check/internal/admin"
-	"github.com/ebo/vibe-check/internal/config"
-	"github.com/ebo/vibe-check/internal/gate"
-	"github.com/ebo/vibe-check/internal/logging"
-	"github.com/ebo/vibe-check/internal/proxy"
-	"github.com/ebo/vibe-check/internal/registry"
+	"github.com/vandenbogart/vibe-check/internal/admin"
+	"github.com/vandenbogart/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/gate"
+	"github.com/vandenbogart/vibe-check/internal/logging"
+	"github.com/vandenbogart/vibe-check/internal/proxy"
+	"github.com/vandenbogart/vibe-check/internal/registry"
 	"github.com/spf13/cobra"
 )
 

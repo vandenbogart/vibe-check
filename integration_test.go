@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebo/vibe-check/internal/gate"
-	"github.com/ebo/vibe-check/internal/proxy"
-	"github.com/ebo/vibe-check/internal/registry"
+	"github.com/vandenbogart/vibe-check/internal/gate"
+	"github.com/vandenbogart/vibe-check/internal/proxy"
+	"github.com/vandenbogart/vibe-check/internal/registry"
 )
 
 func startPyPIProxy(t *testing.T, g *gate.Gate) int {

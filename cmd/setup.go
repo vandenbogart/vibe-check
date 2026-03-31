@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/ebo/vibe-check/internal/config"
-	"github.com/ebo/vibe-check/internal/platform"
-	"github.com/ebo/vibe-check/internal/setup"
+	"github.com/vandenbogart/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/platform"
+	"github.com/vandenbogart/vibe-check/internal/setup"
 	"github.com/spf13/cobra"
 )
 

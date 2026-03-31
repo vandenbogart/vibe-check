@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/ebo/vibe-check/internal/client"
-	"github.com/ebo/vibe-check/internal/config"
-	"github.com/ebo/vibe-check/internal/resolve"
+	"github.com/vandenbogart/vibe-check/internal/client"
+	"github.com/vandenbogart/vibe-check/internal/config"
+	"github.com/vandenbogart/vibe-check/internal/resolve"
 	"github.com/spf13/cobra"
 )
 

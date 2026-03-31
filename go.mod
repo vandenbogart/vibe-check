@@ -1,4 +1,4 @@
-module github.com/ebo/vibe-check
+module github.com/vandenbogart/vibe-check
 
 go 1.23.1
 
