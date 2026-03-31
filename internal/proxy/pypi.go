@@ -191,12 +191,12 @@ func (p *PyPIProxy) handleDownload(w http.ResponseWriter, r *http.Request, proxy
 		"parsed", ok,
 	)
 
-	// Fail open: if we can't parse the filename, proxy through
+	// Fail closed: if we can't parse the filename, block the download
 	if !ok {
-		p.logger.Info("pypi: unparseable filename, proxying through",
+		p.logger.Warn("pypi: unparseable filename, blocking download",
 			"filename", filename,
 		)
-		proxy.ServeHTTP(w, r)
+		http.Error(w, fmt.Sprintf("BLOCKED: could not identify package from download path: %s\nUnable to verify package age. Download blocked for safety.", r.URL.Path), http.StatusForbidden)
 		return
 	}
 

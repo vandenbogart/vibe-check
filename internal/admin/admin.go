@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"path/filepath"
+	"strings"
 
 	"github.com/ebo/vibe-check/internal/config"
 	"github.com/ebo/vibe-check/internal/gate"
@@ -78,6 +79,32 @@ func (s *Server) handleAllow(w http.ResponseWriter, r *http.Request) {
 	var req AllowRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Validate registry
+	if req.Registry != "pypi" && req.Registry != "npm" {
+		http.Error(w, "invalid registry: must be \"pypi\" or \"npm\"", http.StatusBadRequest)
+		return
+	}
+
+	// Validate package and version are non-empty
+	if req.Package == "" {
+		http.Error(w, "package must not be empty", http.StatusBadRequest)
+		return
+	}
+	if req.Version == "" {
+		http.Error(w, "version must not be empty", http.StatusBadRequest)
+		return
+	}
+
+	// Validate no spaces (would corrupt allowlist file format)
+	if strings.ContainsRune(req.Package, ' ') {
+		http.Error(w, "package must not contain spaces", http.StatusBadRequest)
+		return
+	}
+	if strings.ContainsRune(req.Version, ' ') {
+		http.Error(w, "version must not contain spaces", http.StatusBadRequest)
 		return
 	}
 

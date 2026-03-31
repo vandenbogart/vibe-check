@@ -30,7 +30,7 @@ func init() {
 	serveCmd.Flags().IntP("npm-port", "", 3142, "Port for the npm proxy")
 	serveCmd.Flags().StringP("min-age", "", "7d", "Minimum package age before allowing installation")
 	serveCmd.Flags().StringP("data-dir", "", "", "Directory for persistent data")
-	serveCmd.Flags().StringP("log-level", "", "info", "Log level (debug, info, warn, error)")
+	serveCmd.Flags().StringP("log-level", "", "info", "Log level: trace, debug, info")
 }
 
 func runServe(cmd *cobra.Command, args []string) error {
@@ -44,7 +44,9 @@ func runServe(cmd *cobra.Command, args []string) error {
 	if dataDir == "" {
 		dataDir = config.DefaultDataDir()
 	}
-	os.MkdirAll(dataDir, 0o755)
+	if err := os.MkdirAll(dataDir, 0o755); err != nil {
+		return fmt.Errorf("creating data directory: %w", err)
+	}
 
 	// 2. Setup logger
 	logLevel, err := logging.ParseLevel(logLevelStr)

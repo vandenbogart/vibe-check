@@ -137,7 +137,7 @@ func TestDataDir(t *testing.T) {
 		t.Fatalf("UserHomeDir() error = %v", err)
 	}
 
-	want := filepath.Join(home, ".vibe-check") + string(os.PathSeparator)
+	want := filepath.Join(home, ".vibe-check")
 	if dir != want {
 		t.Errorf("DefaultDataDir() = %q, want %q", dir, want)
 	}

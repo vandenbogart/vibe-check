@@ -35,7 +35,7 @@ func DefaultDataDir() string {
 	if err != nil {
 		home = "."
 	}
-	return filepath.Join(home, ".vibe-check") + string(os.PathSeparator)
+	return filepath.Join(home, ".vibe-check")
 }
 
 // ParseMinAge parses a string like "7d" into a time.Duration.

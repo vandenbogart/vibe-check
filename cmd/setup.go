@@ -21,7 +21,7 @@ func init() {
 	setupCmd.Flags().IntP("npm-port", "", 3142, "Port for the npm proxy")
 	setupCmd.Flags().StringP("min-age", "", "7d", "Minimum package age before allowing installation")
 	setupCmd.Flags().StringP("data-dir", "", "", "Directory for persistent data")
-	setupCmd.Flags().StringP("log-level", "", "info", "Log level (debug, info, warn, error)")
+	setupCmd.Flags().StringP("log-level", "", "info", "Log level: trace, debug, info")
 }
 
 func runSetup(cmd *cobra.Command, args []string) error {

@@ -129,12 +129,12 @@ func (n *NPMProxy) handleTarball(w http.ResponseWriter, r *http.Request, proxy *
 		"parsed", ok,
 	)
 
-	// Fail open: if we can't parse the path, proxy through
+	// Fail closed: if we can't parse the path, block the download
 	if !ok {
-		n.logger.Info("npm: unparseable tarball path, proxying through",
+		n.logger.Warn("npm: unparseable tarball path, blocking download",
 			"path", r.URL.Path,
 		)
-		proxy.ServeHTTP(w, r)
+		http.Error(w, fmt.Sprintf("BLOCKED: could not identify package from download path: %s\nUnable to verify package age. Download blocked for safety.", r.URL.Path), http.StatusForbidden)
 		return
 	}
 
