@@ -99,13 +99,30 @@ func PyPIDeps(pkg, version string) ([]Package, error) {
 	defer cancel()
 
 	spec := fmt.Sprintf("%s==%s", pkg, version)
-	cmd := exec.CommandContext(ctx, "pip", "install", "--dry-run",
+	args := []string{"install", "--dry-run",
 		"--report", reportFile,
 		"--index-url", "https://pypi.org/simple/",
-		spec)
-	cmd.Dir = tmpDir
-	if out, err := cmd.CombinedOutput(); err != nil {
-		return nil, fmt.Errorf("pip install --dry-run failed: %w\n%s", err, out)
+		spec}
+
+	// Try pip3 first (more reliable across environments), then pip, then python3 -m pip.
+	var cmd *exec.Cmd
+	var out []byte
+	var pipErr error
+	for _, pip := range [][]string{{"pip3"}, {"pip"}, {"python3", "-m", "pip"}} {
+		cmdArgs := append(pip, args...)
+		cmd = exec.CommandContext(ctx, cmdArgs[0], cmdArgs[1:]...)
+		cmd.Dir = tmpDir
+		out, pipErr = cmd.CombinedOutput()
+		if pipErr == nil {
+			break
+		}
+		if execErr, ok := pipErr.(*exec.Error); ok && execErr.Err == exec.ErrNotFound {
+			continue // binary not found, try next
+		}
+		return nil, fmt.Errorf("pip install --dry-run failed: %w\n%s", pipErr, out)
+	}
+	if pipErr != nil {
+		return nil, fmt.Errorf("pip install --dry-run failed: %w\n%s", pipErr, out)
 	}
 
 	data, err := os.ReadFile(reportFile)
