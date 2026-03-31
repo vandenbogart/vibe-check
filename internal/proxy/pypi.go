@@ -130,6 +130,9 @@ func (p *PyPIProxy) Handler() http.Handler {
 			req.URL.Scheme = pypiTarget.Scheme
 			req.URL.Host = pypiTarget.Host
 			req.Host = pypiTarget.Host
+			// Remove Accept-Encoding so upstream returns uncompressed HTML,
+			// allowing ModifyResponse to rewrite URLs in the body.
+			req.Header.Del("Accept-Encoding")
 		},
 		ModifyResponse: func(resp *http.Response) error {
 			// Only rewrite HTML responses from the simple API
